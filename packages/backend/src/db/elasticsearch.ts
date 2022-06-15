@@ -5,8 +5,8 @@ const index = {
 	settings: {
 		analysis: {
 			analyzer: {
-				ngram: {
-					tokenizer: 'ngram',
+				ik: {
+					tokenizer: 'ik_max_word',
 				},
 			},
 		},
