@@ -16,7 +16,7 @@ const index = {
 			text: {
 				type: 'text',
 				index: true,
-				analyzer: 'ngram',
+				analyzer: 'ik_max_word',
 			},
 			userId: {
 				type: 'keyword',
