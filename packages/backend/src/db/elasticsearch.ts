@@ -6,7 +6,7 @@ const index = {
 		analysis: {
 			analyzer: {
 				ik: {
-					tokenizer: 'ik_smart',
+					tokenizer: 'ik_max_word',
 				},
 			},
 		},
@@ -16,7 +16,7 @@ const index = {
 			text: {
 				type: 'text',
 				index: true,
-				analyzer: 'ik_smart',
+				analyzer: 'ik_max_word',
 			},
 			userId: {
 				type: 'keyword',
