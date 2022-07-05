@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, onUnmounted, ref, inject, watch } from 'vue';
+import { computed, onMounted, onUnmounted, ref, inject, watch, shallowReactive, nextTick, reactive } from 'vue';
 import tinycolor from 'tinycolor2';
 import { popupMenu } from '@/os';
 import { scrollToTop } from '@/scripts/scroll';
@@ -114,7 +114,11 @@ function onTabMousedown(tab: Tab, ev: MouseEvent): void {
 }
 
 function onTabClick(tab: Tab, ev: MouseEvent): void {
-	if (tab.onClick) tab.onClick(ev);
+	if (tab.onClick) {
+		ev.preventDefault();
+		ev.stopPropagation();
+		tab.onClick(ev);
+	}
 	if (tab.key) {
 		emit('update:tab', tab.key);
 	}
@@ -133,16 +137,18 @@ onMounted(() => {
 	calcBg();
 	globalEvents.on('themeChanged', calcBg);
 
-	watch(() => props.tab, () => {
-		const tabEl = tabRefs[props.tab];
-		if (tabEl && tabHighlightEl) {
-			// offsetWidth や offsetLeft は少数を丸めてしまうため getBoundingClientRect を使う必要がある
-			// https://developer.mozilla.org/ja/docs/Web/API/HTMLElement/offsetWidth#%E5%80%A4
-			const parentRect = tabEl.parentElement.getBoundingClientRect();
-			const rect = tabEl.getBoundingClientRect();
-			tabHighlightEl.style.width = rect.width + 'px';
-			tabHighlightEl.style.left = (rect.left - parentRect.left) + 'px';
-		}
+	watch(() => [props.tab, props.tabs], () => {
+		nextTick(() => {
+			const tabEl = tabRefs[props.tab];
+			if (tabEl && tabHighlightEl) {
+				// offsetWidth や offsetLeft は少数を丸めてしまうため getBoundingClientRect を使う必要がある
+				// https://developer.mozilla.org/ja/docs/Web/API/HTMLElement/offsetWidth#%E5%80%A4
+				const parentRect = tabEl.parentElement.getBoundingClientRect();
+				const rect = tabEl.getBoundingClientRect();
+				tabHighlightEl.style.width = rect.width + 'px';
+				tabHighlightEl.style.left = (rect.left - parentRect.left) + 'px';
+			}
+		});
 	}, {
 		immediate: true,
 	});
@@ -150,7 +156,7 @@ onMounted(() => {
 	if (el && el.parentElement) {
 		narrow = el.parentElement.offsetWidth < 500;
 		ro = new ResizeObserver((entries, observer) => {
-			if (el.parentElement) {
+			if (el.parentElement && document.body.contains(el)) {
 				narrow = el.parentElement.offsetWidth < 500;
 			}
 		});
@@ -166,18 +172,15 @@ onUnmounted(() => {
 
 <style lang="scss" scoped>
 .fdidabkb {
-	--height: 60px;
+	--height: 55px;
 	display: flex;
-	position: sticky;
-	top: var(--stickyTop, 0);
-	z-index: 1000;
 	width: 100%;
 	-webkit-backdrop-filter: var(--blur, blur(15px));
 	backdrop-filter: var(--blur, blur(15px));
 	border-bottom: solid 0.5px var(--divider);
 
 	&.thin {
-		--height: 50px;
+		--height: 45px;
 
 		> .buttons {
 			> .button {
@@ -268,6 +271,8 @@ onUnmounted(() => {
 
 		> .icon {
 			margin-right: 8px;
+			width: 16px;
+			text-align: center;
 		}
 
 		> .title {
