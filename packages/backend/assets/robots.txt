@@ -1,4 +1,2 @@
-user-agent: *
-allow: /
+User-agent: *
 Disallow: /tags/
-# todo: sitemap
