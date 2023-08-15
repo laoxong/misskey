@@ -309,8 +309,8 @@ importers:
         specifier: 2.3.0
         version: 2.3.0
       pureimage:
-        specifier: 0.3.17
-        version: 0.3.17
+        specifier: 0.4.7
+        version: 0.4.7
       qrcode:
         specifier: 1.5.3
         version: 1.5.3
@@ -346,7 +346,7 @@ importers:
         version: 0.32.4
       sharp-read-bmp:
         specifier: github:misskey-dev/sharp-read-bmp
-        version: github.com/misskey-dev/sharp-read-bmp/02d9dc189fa7df0c4bea09330be26741772dac01
+        version: git@github.com+misskey-dev/sharp-read-bmp/02d9dc189fa7df0c4bea09330be26741772dac01
       slacc:
         specifier: 0.0.10
         version: 0.0.10
@@ -358,7 +358,7 @@ importers:
         version: 2.1.0
       summaly:
         specifier: github:misskey-dev/summaly
-        version: github.com/misskey-dev/summaly/d2d8db49943ccb201c1b1b283e9d0a630519fac7
+        version: git@github.com+misskey-dev/summaly/d2d8db49943ccb201c1b1b283e9d0a630519fac7
       systeminformation:
         specifier: 5.18.9
         version: 5.18.9
@@ -684,7 +684,7 @@ importers:
         version: 5.1.0
       browser-image-resizer:
         specifier: github:misskey-dev/browser-image-resizer#v2.2.1-misskey.3
-        version: github.com/misskey-dev/browser-image-resizer/0227e860621e55cbed0aabe6dc601096a7748c4a
+        version: git@github.com+misskey-dev/browser-image-resizer/0227e860621e55cbed0aabe6dc601096a7748c4a
       buraha:
         specifier: 0.0.1
         version: 0.0.1
@@ -994,10 +994,10 @@ importers:
         version: 7.0.27
       storybook-addon-misskey-theme:
         specifier: github:misskey-dev/storybook-addon-misskey-theme
-        version: github.com/misskey-dev/storybook-addon-misskey-theme/cf583db098365b2ccc81a82f63ca9c93bc32b640(@storybook/blocks@7.0.27)(@storybook/components@7.1.0)(@storybook/core-events@7.0.27)(@storybook/manager-api@7.0.27)(@storybook/preview-api@7.0.27)(@storybook/theming@7.0.27)(@storybook/types@7.0.27)(react-dom@18.2.0)(react@18.2.0)
+        version: git@github.com+misskey-dev/storybook-addon-misskey-theme/cf583db098365b2ccc81a82f63ca9c93bc32b640(@storybook/blocks@7.0.27)(@storybook/components@7.1.0)(@storybook/core-events@7.0.27)(@storybook/manager-api@7.0.27)(@storybook/preview-api@7.0.27)(@storybook/theming@7.0.27)(@storybook/types@7.0.27)(react-dom@18.2.0)(react@18.2.0)
       summaly:
         specifier: github:misskey-dev/summaly
-        version: github.com/misskey-dev/summaly/d2d8db49943ccb201c1b1b283e9d0a630519fac7
+        version: git@github.com+misskey-dev/summaly/d2d8db49943ccb201c1b1b283e9d0a630519fac7
       vite-plugin-turbosnap:
         specifier: 1.0.2
         version: 1.0.2
@@ -17143,6 +17143,7 @@ packages:
 
   /opentype.js@0.4.11:
     resolution: {integrity: sha512-GthxucX/6aftfLdeU5Ho7o7zmQcC8uVtqdcelVq12X++ndxwBZG8Xb5rFEKT7nEcWDD2P1x+TNuJ70jtj1Mbpw==}
+    hasBin: true
     dev: false
 
   /optionator@0.8.3:
@@ -17750,6 +17751,11 @@ packages:
   /pngjs@5.0.0:
     resolution: {integrity: sha512-40QW5YalBNfQo5yRYmiw7Yz6TKKVr3h6970B2YE+3fQpsWcrbj1PzJgxeJ19DRQjhMbKPIuMY8rFaXc8moolVw==}
     engines: {node: '>=10.13.0'}
+    dev: false
+
+  /pngjs@7.0.0:
+    resolution: {integrity: sha512-LKWqWJRhstyYo9pGvgor/ivk2w94eSjE3RGVuzLGlr3NmD8bf7RcYGze1mNdEHRP6TRP6rMuDHk5t44hnTRyow==}
+    engines: {node: '>=14.19.0'}
     dev: false
 
   /polished@4.2.2:
@@ -18382,13 +18388,13 @@ packages:
     resolution: {integrity: sha512-rLSBxJjP+4DQOgcJAx6RZHT2he2pkhQdSnofG5VWyVl6GRq/K02ISOuOLcsMOrtKDIJb8JN2zm3FFzWNbezdPw==}
     dev: true
 
-  /pureimage@0.3.17:
-    resolution: {integrity: sha512-JV4hfYF1BXxDwbSR8hjhVEhVTxwmAXos8uIXQ7Bw2eWrUEpLDJnQoQ8WLlWAO4TMGJ7mp9n6gvLKJ6MSaGUkXQ==}
-    engines: {node: '>=0.8'}
+  /pureimage@0.4.7:
+    resolution: {integrity: sha512-cQLX7lcv0WD6zAXUwC5US+lgCnDOIPvN77cdP3BADpmC3iA5eKoGVwB1C4rxNzP3rH9TbG/E9dNf1+7H9YWwUQ==}
+    engines: {node: '>=14.19.0'}
     dependencies:
       jpeg-js: 0.4.4
       opentype.js: 0.4.11
-      pngjs: 3.4.0
+      pngjs: 7.0.0
     dev: false
 
   /q@1.5.1:
@@ -22074,14 +22080,14 @@ packages:
       readable-stream: 3.6.0
     dev: false
 
-  github.com/misskey-dev/browser-image-resizer/0227e860621e55cbed0aabe6dc601096a7748c4a:
-    resolution: {tarball: https://codeload.github.com/misskey-dev/browser-image-resizer/tar.gz/0227e860621e55cbed0aabe6dc601096a7748c4a}
+  git@github.com+misskey-dev/browser-image-resizer/0227e860621e55cbed0aabe6dc601096a7748c4a:
+    resolution: {commit: 0227e860621e55cbed0aabe6dc601096a7748c4a, repo: git@github.com:misskey-dev/browser-image-resizer.git, type: git}
     name: browser-image-resizer
     version: 2.2.1-misskey.3
     dev: false
 
-  github.com/misskey-dev/sharp-read-bmp/02d9dc189fa7df0c4bea09330be26741772dac01:
-    resolution: {tarball: https://codeload.github.com/misskey-dev/sharp-read-bmp/tar.gz/02d9dc189fa7df0c4bea09330be26741772dac01}
+  git@github.com+misskey-dev/sharp-read-bmp/02d9dc189fa7df0c4bea09330be26741772dac01:
+    resolution: {commit: 02d9dc189fa7df0c4bea09330be26741772dac01, repo: git@github.com:misskey-dev/sharp-read-bmp.git, type: git}
     name: sharp-read-bmp
     version: 1.0.0
     dependencies:
@@ -22090,9 +22096,9 @@ packages:
       sharp: 0.31.3
     dev: false
 
-  github.com/misskey-dev/storybook-addon-misskey-theme/cf583db098365b2ccc81a82f63ca9c93bc32b640(@storybook/blocks@7.0.27)(@storybook/components@7.1.0)(@storybook/core-events@7.0.27)(@storybook/manager-api@7.0.27)(@storybook/preview-api@7.0.27)(@storybook/theming@7.0.27)(@storybook/types@7.0.27)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {tarball: https://codeload.github.com/misskey-dev/storybook-addon-misskey-theme/tar.gz/cf583db098365b2ccc81a82f63ca9c93bc32b640}
-    id: github.com/misskey-dev/storybook-addon-misskey-theme/cf583db098365b2ccc81a82f63ca9c93bc32b640
+  git@github.com+misskey-dev/storybook-addon-misskey-theme/cf583db098365b2ccc81a82f63ca9c93bc32b640(@storybook/blocks@7.0.27)(@storybook/components@7.1.0)(@storybook/core-events@7.0.27)(@storybook/manager-api@7.0.27)(@storybook/preview-api@7.0.27)(@storybook/theming@7.0.27)(@storybook/types@7.0.27)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {commit: cf583db098365b2ccc81a82f63ca9c93bc32b640, repo: git@github.com:misskey-dev/storybook-addon-misskey-theme.git, type: git}
+    id: git@github.com+misskey-dev/storybook-addon-misskey-theme/cf583db098365b2ccc81a82f63ca9c93bc32b640
     name: storybook-addon-misskey-theme
     version: 0.0.0
     peerDependencies:
@@ -22122,8 +22128,8 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: true
 
-  github.com/misskey-dev/summaly/d2d8db49943ccb201c1b1b283e9d0a630519fac7:
-    resolution: {tarball: https://codeload.github.com/misskey-dev/summaly/tar.gz/d2d8db49943ccb201c1b1b283e9d0a630519fac7}
+  git@github.com+misskey-dev/summaly/d2d8db49943ccb201c1b1b283e9d0a630519fac7:
+    resolution: {commit: d2d8db49943ccb201c1b1b283e9d0a630519fac7, repo: git@github.com:misskey-dev/summaly.git, type: git}
     name: summaly
     version: 4.0.2
     dependencies:
