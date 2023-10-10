@@ -397,8 +397,8 @@ importers:
         specifier: 1.3.11
         version: 1.3.11
       '@swc/core-darwin-arm64':
-        specifier: 1.3.56
-        version: 1.3.56
+        specifier: 1.3.92
+        version: 1.3.92
       '@swc/core-darwin-x64':
         specifier: 1.3.56
         version: 1.3.56
@@ -6948,15 +6948,6 @@ packages:
     requiresBuild: true
     dependencies:
       '@swc/wasm': 1.2.130
-    dev: false
-    optional: true
-
-  /@swc/core-darwin-arm64@1.3.56:
-    resolution: {integrity: sha512-DZcu7BzDaLEdWHabz9DRTP0yEBLqkrWmskFcD5BX0lGAvoIvE4duMnAqi5F2B3X7630QioHRCYFoRw2WkeE3Cw==}
-    engines: {node: '>=10'}
-    cpu: [arm64]
-    os: [darwin]
-    requiresBuild: true
     dev: false
     optional: true
 
