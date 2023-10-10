@@ -418,8 +418,8 @@ importers:
         specifier: 1.3.56
         version: 1.3.56
       '@swc/core-linux-x64-musl':
-        specifier: 1.3.56
-        version: 1.3.56
+        specifier: 1.3.92
+        version: 1.3.92
       '@swc/core-win32-arm64-msvc':
         specifier: 1.3.56
         version: 1.3.56
@@ -7062,15 +7062,6 @@ packages:
     cpu: [x64]
     os: [linux]
     requiresBuild: true
-    optional: true
-
-  /@swc/core-linux-x64-musl@1.3.56:
-    resolution: {integrity: sha512-r+D34WLAOAlJtfw1gaVWpHRwCncU9nzW9i7w9kSw4HpWYnHJOz54jLGSEmNsrhdTCz1VK2ar+V2ktFUsrlGlDA==}
-    engines: {node: '>=10'}
-    cpu: [x64]
-    os: [linux]
-    requiresBuild: true
-    dev: false
     optional: true
 
   /@swc/core-linux-x64-musl@1.3.92:
