@@ -15,7 +15,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 	@contextmenu.stop
 	@keydown.stop
 >
-	<button v-if="hide" :class="$style.hidden" @click="hide = false">
+	<button v-if="hide" :class="$style.hidden" @click="show">
 		<div :class="$style.hiddenTextWrapper">
 			<b v-if="audio.isSensitive" style="display: block;"><i class="ti ti-eye-exclamation"></i> {{ i18n.ts.sensitive }}{{ defaultStore.state.dataSaver.media ? ` (${i18n.ts.audio}${audio.size ? ' ' + bytes(audio.size) : ''})` : '' }}</b>
 			<b v-else style="display: block;"><i class="ti ti-music"></i> {{ defaultStore.state.dataSaver.media && audio.size ? bytes(audio.size) : i18n.ts.audio }}</b>
@@ -39,23 +39,37 @@ SPDX-License-Identifier: AGPL-3.0-only
 		<audio
 			ref="audioEl"
 			preload="metadata"
+			@keydown.prevent="() => {}"
 		>
 			<source :src="audio.url">
 		</audio>
 		<div :class="[$style.controlsChild, $style.controlsLeft]">
-			<button class="_button" :class="$style.controlButton" @click="togglePlayPause">
+			<button
+				:class="['_button', $style.controlButton]"
+				tabindex="-1"
+				@click.stop="togglePlayPause"
+			>
 				<i v-if="isPlaying" class="ti ti-player-pause-filled"></i>
 				<i v-else class="ti ti-player-play-filled"></i>
 			</button>
 		</div>
 		<div :class="[$style.controlsChild, $style.controlsRight]">
-			<button class="_button" :class="$style.controlButton" @click="showMenu">
+			<button
+				:class="['_button', $style.controlButton]"
+				tabindex="-1"
+				@click.stop="() => {}"
+				@mousedown.prevent.stop="showMenu"
+			>
 				<i class="ti ti-settings"></i>
 			</button>
 		</div>
 		<div :class="[$style.controlsChild, $style.controlsTime]">{{ hms(elapsedTimeMs) }}</div>
 		<div :class="[$style.controlsChild, $style.controlsVolume]">
-			<button class="_button" :class="$style.controlButton" @click="toggleMute">
+			<button
+				:class="['_button', $style.controlButton]"
+				tabindex="-1"
+				@click.stop="toggleMute"
+			>
 				<i v-if="volume === 0" class="ti ti-volume-3"></i>
 				<i v-else class="ti ti-volume"></i>
 			</button>
@@ -141,6 +155,18 @@ const audioEl = shallowRef<HTMLAudioElement>();
 
 // eslint-disable-next-line vue/no-setup-props-reactivity-loss
 const hide = ref((defaultStore.state.nsfw === 'force' || defaultStore.state.dataSaver.media) ? true : (props.audio.isSensitive && defaultStore.state.nsfw !== 'ignore'));
+
+async function show() {
+	if (props.audio.isSensitive && defaultStore.state.confirmWhenRevealingSensitiveMedia) {
+		const { canceled } = await os.confirm({
+			type: 'question',
+			text: i18n.ts.sensitiveMediaRevealConfirm,
+		});
+		if (canceled) return;
+	}
+
+	hide.value = false;
+}
 
 // Menu
 const menuShowing = ref(false);
@@ -371,7 +397,7 @@ onDeactivated(() => {
 	border-radius: var(--radius);
 	overflow: clip;
 
-	&:focus {
+	&:focus-visible {
 		outline: none;
 	}
 }
@@ -436,6 +462,10 @@ onDeactivated(() => {
 		&:hover {
 			color: var(--accent);
 			background-color: var(--accentedBg);
+		}
+
+		&:focus-visible {
+			outline: none;
 		}
 	}
 }
