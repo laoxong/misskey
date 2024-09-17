@@ -5,7 +5,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 
 <template>
 <MkPullToRefresh :refresher="() => reload()">
-	<MkPagination ref="pagingComponent" :pagination="pagination">
+	<MkPagination ref="pagingComponent" :pagination="pagination" @queue="onQueue">
 		<template #empty>
 			<div class="_fullinfo">
 				<img :src="infoImageUrl" class="_ghost"/>
@@ -65,7 +65,24 @@ function onNotification(notification) {
 
 	if (!isMuted) {
 		pagingComponent.value?.prepend(notification);
+		onQueue();
 	}
+}
+
+let queued = false;
+
+function checkAllNotificationsCanRead() {
+	queued = false;
+	if (!document.hasFocus()) { onQueue(); return; }
+	if (!(pagingComponent.value?.queue.size) && !(props.excludeTypes?.length)) {
+		misskeyApi('notifications/mark-all-as-read');
+	}
+}
+
+function onQueue() {
+	if (queued) return;
+	queued = true;
+	setTimeout(() => checkAllNotificationsCanRead(), 2000);
 }
 
 function reload() {
