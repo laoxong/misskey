@@ -36,6 +36,7 @@ import { infoImageUrl } from '@/instance.js';
 import { defaultStore } from '@/store.js';
 import MkPullToRefresh from '@/components/MkPullToRefresh.vue';
 import * as Misskey from 'misskey-js';
+import { misskeyApi } from '@/scripts/misskey-api';
 
 const props = defineProps<{
 	excludeTypes?: typeof notificationTypes[number][];
