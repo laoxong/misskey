@@ -19,7 +19,7 @@ jobs:
 
     env:
       NODE_OPTIONS: "--max_old_space_size=7168"
-
+    if: github.repository == 'misskey-dev/misskey'
     steps:
     - uses: actions/checkout@v4.1.1
       if: github.event_name != 'pull_request_target'

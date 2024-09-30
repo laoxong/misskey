@@ -545,7 +545,7 @@ function loadConversation() {
 	});
 }
 
-onMounted(()=>{
+onMounted(() => {
 	loadReplies();
 	loadConversation();
 });
