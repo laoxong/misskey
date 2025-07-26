@@ -12,9 +12,9 @@ SPDX-License-Identifier: AGPL-3.0-only
 	tabindex="0"
 >
 	<div v-if="appearNote.reply && appearNote.reply.replyId">
-		<div v-if="!conversationLoaded" style="padding: 16px">
+		<!-- <div v-if="!conversationLoaded" style="padding: 16px">
 			<MkButton style="margin: 0 auto;" primary rounded @click="loadConversation">{{ i18n.ts.loadConversation }}</MkButton>
-		</div>
+		</div> -->
 		<MkNoteSub v-for="note in conversation" :key="note.id" :class="$style.replyToMore" :note="note"/>
 	</div>
 	<MkNoteSub v-if="appearNote.replyId" :note="appearNote?.reply ?? null" :class="$style.replyTo"/>
@@ -111,7 +111,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 						</div>
 					</div>
 					<div v-if="appearNote.files && appearNote.files.length > 0">
-						<MkMediaList ref="galleryEl" :mediaList="appearNote.files" :user="appearNote.user"/>
+						<MkMediaList ref="galleryEl" :mediaList="appearNote.files"/>
 					</div>
 					<MkPoll
 						v-if="appearNote.poll"
@@ -126,7 +126,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 					<div v-if="isEnabledUrlPreview">
 						<MkUrlPreview v-for="url in urls" :key="url" :url="url" :compact="true" :detail="true" style="margin-top: 6px;"/>
 					</div>
-					<div v-if="appearNote.renoteId" :class="$style.quote"><MkNoteSimple :note="appearNote?.renote ?? null" :class="$style.quoteNote"/></div>
+					<div v-if="appearNote.renote" :class="$style.quote"><MkNoteSimple :note="appearNote.renote" :class="$style.quoteNote"/></div>
 				</div>
 				<MkA v-if="appearNote.channel && !inChannel" :class="$style.channel" :to="`/channels/${appearNote.channel.id}`"><i class="ti ti-device-tv"></i> {{ appearNote.channel.name }}</MkA>
 			</div>
@@ -191,9 +191,9 @@ SPDX-License-Identifier: AGPL-3.0-only
 		</div>
 		<div>
 			<div v-if="tab === 'replies'">
-				<div v-if="!repliesLoaded" style="padding: 16px">
+				<!-- <div v-if="!repliesLoaded" style="padding: 16px">
 					<MkButton style="margin: 0 auto;" primary rounded @click="loadReplies">{{ i18n.ts.loadReplies }}</MkButton>
-				</div>
+				</div> -->
 				<MkNoteSub v-for="note in replies" :key="note.id" :note="note" :class="$style.reply" :detail="true"/>
 			</div>
 			<div v-else-if="tab === 'renotes'" :class="$style.tab_renotes">
@@ -239,7 +239,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 </template>
 
 <script lang="ts" setup>
-import { inject, provide, ref, useTemplateRef, markRaw, computed } from 'vue';
+import { computed, inject, markRaw, onMounted, provide, ref, useTemplateRef } from 'vue';
 import * as Misskey from 'misskey-js';
 import { useNote } from '@/composables/use-note.js';
 import { prefer } from '@/preferences.js';
@@ -349,10 +349,10 @@ const reactionsPaginator = markRaw(new Paginator('notes/reactions', {
 }));
 
 const replies = ref<Misskey.entities.Note[]>([]);
-const repliesLoaded = ref(false);
+// const repliesLoaded = ref(false);
 
 function loadReplies() {
-	repliesLoaded.value = true;
+	// repliesLoaded.value = true;
 	misskeyApi('notes/children', {
 		noteId: appearNote.id,
 		limit: 30,
@@ -362,10 +362,10 @@ function loadReplies() {
 }
 
 const conversation = ref<Misskey.entities.Note[]>([]);
-const conversationLoaded = ref(false);
+// const conversationLoaded = ref(false);
 
 function loadConversation() {
-	conversationLoaded.value = true;
+	// conversationLoaded.value = true;
 	if (appearNote.replyId == null) return;
 	misskeyApi('notes/conversation', {
 		noteId: appearNote.replyId,
@@ -397,6 +397,12 @@ const keymap = {
 		callback: () => blur(),
 	},
 } as const satisfies Keymap;
+
+// Extend note content automatically (no manual click)
+onMounted(() => {
+	loadReplies();
+	loadConversation();
+});
 </script>
 
 <style lang="scss" module>
